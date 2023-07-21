@@ -1,19 +1,22 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
-   <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
-  </footer>
+  <div class="d-flex vh-100">
+    <LoginComponent />
+    <main class="container-fluid p-0">
+      <Navbar class="navbar" />
+      <div class="main-section d-flex">
+        <router-view />
+        <AdComponent />
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
+import LoginComponent from './components/LoginComponent.vue'
 import Navbar from './components/Navbar.vue'
+import AdComponent from './components/AdComponent.vue'
 
 export default {
   setup() {
@@ -21,20 +24,23 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar }
+  components: { LoginComponent, Navbar, AdComponent }
 }
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
 
-:root{
-  --main-height: calc(100vh - 32px - 64px);
+main{
+  background-color: $background;
+  font-family: 'Nunito', sans-serif;
 }
 
-
-footer {
-  display: grid;
-  place-content: center;
-  height: 32px;
+.navbar {
+  height: 10dvh;
 }
+
+.main-section {
+  height: 90dvh;
+}
+
 </style>

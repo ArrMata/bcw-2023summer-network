@@ -3,6 +3,13 @@
 @import "./_overrides.scss";
 @import "./_utilities.scss";
 @import "./loaders.scss";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+$text: #e7edfe;
+$background: #030d2b;
+$primary: #2159f2;
+$secondary: #04133f;
+$accent: #1c55f2;
 
 body{
   overscroll-behavior: none;
