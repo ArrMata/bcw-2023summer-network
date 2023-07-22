@@ -1,14 +1,35 @@
 <template>
-  <div class="main-section">
+  <div v-if="posts" ref="postsElem" class="main-section">
     <div class="row m-0">
-      <div class="col-10">
+      <div v-if="account.id" class="col-10 p-0 mt-4 mx-auto">
+        <form class="post-form" @submit.prevent="">
+          <div class="d-flex align-items-start">
+            <img class="avatar" :src="account.picture" :alt="account.name"/>
+            <div class="px-3 w-100">
+              <div class="mb-3">
+                <textarea class="form-control" name="" id="" rows="3" placeholder="Share something!"></textarea>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-plus-box-multiple"></i></span>
+                <input type="url" class="form-control" placeholder="Photo/Video">
+                <button>Post <i class="mdi mdi-send-variant"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-      <div v-for="post in posts" ref="postsElem" :key="post.id" class="post col-10 p-0 my-4 mx-auto">
+      <div v-for="post in posts" :key="post.id" class="post col-10 p-0 my-4 mx-auto">
         <Post :post="post"/>
       </div>
       <div class="col-10 d-flex justify-content-between mx-auto mb-3">
         <button @click="getPrevPosts" :disabled="!prevPosts"><i class=" mdi mdi-menu-left"></i>Older</button>
         <button @click="getNextPosts" :disabled="!nextPosts">Newer<i class="mdi mdi-menu-right"></i></button>
+      </div>
+    </div>
+  </div>
+  <div v-else class="main-section">
+    <div class="row m-0">
+      <div class="col-10 placeholder placeholder-glow mx-auto">
       </div>
     </div>
   </div>
@@ -38,8 +59,7 @@ export default {
     const getNextPosts = async() => {
       try {
         await postsService.getNextPosts()
-        logger.log(postsElem.value)
-        postsElem.value.scrollTop = 0
+        postsElem.value.scrollTo({top:0, behavior:"smooth"})
       } catch (error) {
         Pop.error(error.message)
       }
@@ -48,16 +68,21 @@ export default {
     const getPrevPosts = async() => {
       try {
         await postsService.getPrevPosts()
+        postsElem.value.scrollTo({top:0, behavior:"smooth"})
       } catch (error) {
         Pop.error(error.message)
       }
     }
 
+    
+
     onMounted(() => {
+      logger.log('mounted, getting posts')
       getPosts()
     })
 
     return {
+      account: computed(() => AppState.account),
       posts: computed(() => AppState.posts),
       nextPosts: computed(() => AppState.nextPosts),
       prevPosts: computed(() => AppState.prevPosts),
@@ -78,11 +103,50 @@ export default {
   overflow-y: scroll;
 }
 
+.avatar {
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+}
+
 .post {
   color: $text;
   background-color: $secondary;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.699);
+}
+
+.post-form {
+  color: $text;
+  background-color: $secondary;
+  padding: 1rem;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.699);
+}
+
+.post-form textarea {
+  width: 100%;
+  resize: none;
+  background-color: $background;
+  color: $text;
+}
+.post-form textarea:focus {
+  background-color: $background;
+  color: $text;
+}
+input[type="url"] {
+  background-color: $background;
+  color: $text;
+}
+
+input[type="url"]:focus {
+  background-color: $background;
+  color: $text;
+}
+
+.input-group-text {
+  background-color: $primary;
+  color: $text;
 }
 
 button {

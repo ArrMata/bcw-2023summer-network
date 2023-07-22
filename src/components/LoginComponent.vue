@@ -45,14 +45,14 @@ import { AuthService } from '../services/AuthService'
 export default {
   setup() {
     return {
-      user: computed(() => AppState.user),
-      account: computed(() => AppState.account),
-      async login() {
-        AuthService.loginWithPopup()
-      },
-      async logout() {
-        AuthService.logout({ returnTo: window.location.origin })
-      }
+    user: computed(() => AppState.user),
+        account: computed(() => AppState.account),
+        async login() {
+            AuthService.loginWithPopup()
+        },
+        async logout() {
+            AuthService.logout({ returnTo: window.location.origin })
+        }
     }
   }
 }
@@ -68,7 +68,9 @@ export default {
         width: 20dvw;
         font-family: 'Nunito', sans-serif;
         text-align: center;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.671);
+        box-shadow: 0px 0px 5px rgb(0, 0, 0);
+        position: relative;
+        z-index: 2;
     }
 
     .login-section h1 {

@@ -24,6 +24,9 @@ export default {
   padding: 0 0.5rem;
   display: flex;
   align-items: center;
+  box-shadow: 0px 0px 5px rgb(0, 0, 0);
+  position: relative;
+  z-index: 1;
 }
 
 .navbar h2 {

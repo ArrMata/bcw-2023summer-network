@@ -45,6 +45,9 @@ export default {
     background-color: $secondary;
     color: $text;
     text-align: center;
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    position: relative;
+    z-index: 1;
 }
 
 .ad-section h3{
