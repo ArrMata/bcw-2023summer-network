@@ -13,12 +13,6 @@
       </div>
     </div>
   </div>
-  <div v-else class="main-section">
-    <div class="row m-0">
-      <div class="col-10 placeholder placeholder-glow mx-auto">
-      </div>
-    </div>
-  </div>
   <EditModal />
 </template>
 
