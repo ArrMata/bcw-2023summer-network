@@ -1,21 +1,67 @@
 import { AppState } from "../AppState"
 import { Post } from "../models/Post"
+import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
 
 class PostsService {
     async getPosts() {
-        const res = await api.get('api/posts')
-        this.populateAppStatePosts(res)
+        try {
+            const res = await api.get('api/posts')
+            this.populateAppStatePosts(res)
+        } catch (error) {
+            Pop.error(error.message)
+        }
     }
 
     async getNextPosts() {
-        const res = await api.get(AppState.nextPosts)
-        this.populateAppStatePosts(res)
+        try {
+            const res = await api.get(AppState.nextPosts)
+            this.populateAppStatePosts(res)
+        } catch (error) {
+            Pop.error(error.message)
+        }
     }
 
     async getPrevPosts() {
-        const res = await api.get(AppState.prevPosts)
-        this.populateAppStatePosts(res)
+        try {
+            const res = await api.get(AppState.prevPosts)
+            this.populateAppStatePosts(res)
+        } catch (error) {
+            Pop.error(error.message)
+        }
+    }
+
+    async createPost(reqBody) {
+        try {
+            const res = await api.post('api/posts', reqBody)
+            const newPost = new Post(res.data)
+            AppState.posts.unshift(newPost)
+        } catch (error) {
+            Pop.error(error.message)
+        }
+    }
+
+    async deletePost(post) {
+        try {
+            await api.delete(`api/posts/${post.id}`)
+            AppState.posts = AppState.posts.filter(appPost => appPost.id != post.id)
+        } catch (error) {
+            Pop.error(error.message)
+        }
+    }
+
+    setActivePost(post) {
+        AppState.activePost = post
+    }
+
+    async editPost(post) {
+        try {
+            const res = await api.put(`api/posts/${post.id}`, { body: post.body, imgUrl: post.imgUrl })
+            const postIndex = AppState.posts.findIndex(appPost => appPost.id == post.id)
+            AppState.posts[postIndex] = new Post(res.data)
+        } catch (error) {
+            Pop.error(error.message)
+        }
     }
 
     populateAppStatePosts(response) {

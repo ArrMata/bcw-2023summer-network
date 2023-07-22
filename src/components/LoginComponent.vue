@@ -45,7 +45,7 @@ import { AuthService } from '../services/AuthService'
 export default {
   setup() {
     return {
-    user: computed(() => AppState.user),
+        user: computed(() => AppState.user),
         account: computed(() => AppState.account),
         async login() {
             AuthService.loginWithPopup()
