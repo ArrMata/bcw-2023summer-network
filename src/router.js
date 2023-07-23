@@ -35,6 +35,16 @@ const routes = [
     beforeEnter: authGuard
   },
   {
+    path: '/search',
+    name: 'Search',
+    component: loadPage('SearchPage'),
+    beforeEnter: (to) => {
+      if (!to.query.search) {
+        return false
+      }
+    }
+  },
+  {
     path: '/usernotfound',
     name: 'UserNotFound',
     component: loadPage('UserNotFound')

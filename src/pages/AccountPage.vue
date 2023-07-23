@@ -20,13 +20,15 @@
                 <label for="coverImg" class="form-label mt-3 ">Cover Image URL</label>
                 <input type="url" min="50" maxlength="300" id="coverImg" v-model="editable.coverImg" class="form-control">
               </div>
-              <div class="mx-3">
+              <div class="mx-3 d-flex flex-column justify-content-center">
                 <label for="github" class="form-label">Github</label>
                 <input type="url" min="50" maxlength="300" id="github" v-model="editable.github" class="form-control">
                 <label for="LinkedIn" class="form-label mt-3 ">LinkedIn</label>
                 <input type="url" min="50" maxlength="300" id="LinkedIn" v-model="editable.linkedin" class="form-control">
                 <label for="Resume" class="form-label mt-3 ">Resume</label>
                 <input type="url" min="50" maxlength="300" id="Resume" v-model="editable.resume" class="form-control">
+                <label for="graduated" class="form-label mt-3">Graduated?</label>
+                <input v-model="editable.graduated" type="checkbox" id="graduated" class="d-block text-center mb-4">
               </div>
               <div class="flex-grow-1">
                 <label for="bio">Bio</label>

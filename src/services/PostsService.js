@@ -89,6 +89,10 @@ class PostsService {
         AppState.activePost = null
     }
 
+    clearPosts() {
+        AppState.posts = []
+    }
+
     populateAppStatePosts(response) {
         AppState.posts = response.data.posts.map(postData => new Post(postData))
         AppState.nextPosts = response.data.older ? response.data.older : ""

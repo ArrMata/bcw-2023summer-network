@@ -100,8 +100,8 @@ export default {
   border-radius: 50%;
 }
 .img-container img {
-  object-fit: cover;
-  max-height: 60dvh;
+  object-fit:fill;
+  max-height: 75dvh;
   width: 100%;
 }
 

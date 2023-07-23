@@ -9,8 +9,8 @@
                     </div>
                     <div class="col-12 py-5 px-4">
                         <div class="d-flex justify-content-between align-items-end">
-                            <h5>Class of {{ activeProfile.class }}</h5>
-                            <div class="d-flex justify-content-center">
+                            <h5 v-if="activeProfile.class">Class of {{ activeProfile.class }}</h5>
+                            <div class="ms-auto d-flex justify-content-center">
                                 <a class="link" v-if="activeProfile.github" title="Github" :href="activeProfile.github">
                                     <i class="mdi mdi-github fs-1"></i>
                                 </a>
@@ -54,16 +54,16 @@
             <div v-for="post in posts" :key="post.id" class="post col-10 p-0 my-4 mx-auto">
                 <Post :post="post"/>
             </div>
-            <div class="col-10 d-flex justify-content-between mx-auto mb-3">
-                <button @click="getPrevPosts" :disabled="!prevPosts"><i class=" mdi mdi-menu-left"></i>Older</button>
-                <button @click="getNextPosts" :disabled="!nextPosts">Newer<i class="mdi mdi-menu-right"></i></button>
+            <div v-if="posts.length > 0" class="col-10 d-flex justify-content-between mx-auto mb-3">
+                <button @click="getPrevPosts" :disabled="!prevPosts"><i class=" mdi mdi-menu-left"></i>Newer</button>
+                <button @click="getNextPosts" :disabled="!nextPosts">Older<i class="mdi mdi-menu-right"></i></button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import PostForm from '../components/PostForm.vue';
 import Post from '../components/Post.vue';
 import { AppState } from '../AppState';
@@ -93,9 +93,14 @@ export default {
         const getProfilePosts = async() => {
             await postsService.getProfilePosts()
         }
+
         onMounted(async() => {
             await getProfile()
             getProfilePosts()
+        })
+
+        onUnmounted(() => {
+            postsService.clearPosts()
         })
 
         const postsElem = ref(null)

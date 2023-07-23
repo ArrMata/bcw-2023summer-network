@@ -12,6 +12,19 @@ class ProfilesService {
             Pop.error(error.message)
         }
     }
+
+    async getProfilesByQuery(query) {
+        try {
+            const res = await api.get(`api/profiles?query=${query}`)
+            AppState.profiles = res.data.map(profileData => new Profile(profileData))
+        } catch (error) {
+            Pop.error(error)
+        }
+    }
+
+    clearProfiles() {
+        AppState.profiles = []
+    }
 }
 
 export const profilesService = new ProfilesService()

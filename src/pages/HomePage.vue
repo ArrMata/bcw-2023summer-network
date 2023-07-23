@@ -7,13 +7,12 @@
       <div v-for="post in posts" :key="post.id" class="post col-10 p-0 my-4 mx-auto">
         <Post :post="post"/>
       </div>
-      <div class="col-10 d-flex justify-content-between mx-auto mb-3">
-        <button @click="getPrevPosts" :disabled="!prevPosts"><i class=" mdi mdi-menu-left"></i>Older</button>
-        <button @click="getNextPosts" :disabled="!nextPosts">Newer<i class="mdi mdi-menu-right"></i></button>
+      <div v-if="posts.length > 1" class="col-10 d-flex justify-content-between mx-auto mb-3">
+        <button @click="getPrevPosts" :disabled="!prevPosts"><i class=" mdi mdi-menu-left"></i>Newer</button>
+        <button @click="getNextPosts" :disabled="!nextPosts">Older<i class="mdi mdi-menu-right"></i></button>
       </div>
     </div>
   </div>
-  <EditModal />
 </template>
 
 <script>
@@ -22,8 +21,6 @@ import { computed, onMounted, ref } from 'vue';
 import { AppState } from '../AppState';
 import Post from '../components/Post.vue';
 import PostForm from '../components/PostForm.vue';
-import EditModal from '../components/EditModal.vue';
-
 
 export default {
   setup() {
@@ -35,6 +32,10 @@ export default {
 
     onMounted(() => {
       getPosts()
+    })
+
+    onMounted(() => {
+      postsService.clearPosts()
     })
 
     return {
@@ -52,7 +53,7 @@ export default {
       }
     } 
   },
-  components: { Post, PostForm, EditModal }
+  components: { Post, PostForm }
 }
 </script>
 

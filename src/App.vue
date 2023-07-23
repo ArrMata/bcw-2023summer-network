@@ -8,6 +8,7 @@
         <AdComponent />
       </div>
     </main>
+    <EditModal />
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import { AppState } from './AppState'
 import LoginComponent from './components/LoginComponent.vue'
 import Navbar from './components/Navbar.vue'
 import AdComponent from './components/AdComponent.vue'
+import EditModal from './components/EditModal.vue'
 
 export default {
   setup() {
@@ -24,7 +26,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { LoginComponent, Navbar, AdComponent }
+  components: { LoginComponent, Navbar, AdComponent, EditModal }
 }
 </script>
 <style lang="scss">
