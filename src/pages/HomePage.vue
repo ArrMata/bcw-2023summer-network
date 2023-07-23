@@ -21,12 +21,11 @@ import { postsService } from '../services/PostsService.js'
 import { computed, onMounted, ref } from 'vue';
 import { AppState } from '../AppState';
 import Post from '../components/Post.vue';
-import { logger } from '../utils/Logger';
 import PostForm from '../components/PostForm.vue';
 import EditModal from '../components/EditModal.vue';
 
-export default {
 
+export default {
   setup() {
 
     const postsElem = ref(null)
@@ -35,7 +34,6 @@ export default {
     }
 
     onMounted(() => {
-      logger.log('mounted, getting posts')
       getPosts()
     })
 

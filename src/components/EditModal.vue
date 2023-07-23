@@ -5,7 +5,7 @@
             <div class="modal-content" data-bs-theme="dark">
                     <div class="title">
                         <h5 class="modal-title">Edit Post</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" @click="clearActivePost" aria-label="Close"></button>
                     </div>
                 <div class="body container-fluid">
                     <form @submit.prevent="editPost" id="editForm" >
@@ -49,6 +49,9 @@ export default {
                 await postsService.editPost(editable.value)
                 Modal.getOrCreateInstance('#editModal').hide()
                 Pop.success('Post edited! 💾')
+            },
+            clearActivePost() {
+                postsService.clearActivePost()
             }
         }
     }
@@ -112,15 +115,15 @@ export default {
     }
 
     .text-input textarea {
-    width: 100%;
-    resize: none;
-    background-color: $background;
-    color: $text;
+        width: 100%;
+        resize: none;
+        background-color: $background;
+        color: $text;
     }
 
     .text-input textarea:focus {
-    background-color: $background;
-    color: $text;
+        background-color: $background;
+        color: $text;
     }
     
     input[type="url"] {
@@ -129,21 +132,21 @@ export default {
     }
 
     input[type="url"]:focus {
-    background-color: $background;
-    color: $text;
+        background-color: $background;
+        color: $text;
     }
 
     input[type="url"]::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $text;
-    opacity: 1; /* Firefox */
+        color: $text;
+        opacity: 1; /* Firefox */
     }
 
     input[type="url"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: $text;
+        color: $text;
     }
 
     input[type="url"]::-ms-input-placeholder { /* Microsoft Edge */
-    color: $text;
+        color: $text;
     }
 
 </style>

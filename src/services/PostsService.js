@@ -1,5 +1,6 @@
 import { AppState } from "../AppState"
 import { Post } from "../models/Post"
+import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
 
@@ -7,6 +8,15 @@ class PostsService {
     async getPosts() {
         try {
             const res = await api.get('api/posts')
+            this.populateAppStatePosts(res)
+        } catch (error) {
+            Pop.error(error.message)
+        }
+    }
+
+    async getProfilePosts() {
+        try {
+            const res = await api.get(`api/profiles/${AppState.activeProfile.id}/posts`)
             this.populateAppStatePosts(res)
         } catch (error) {
             Pop.error(error.message)
@@ -50,8 +60,15 @@ class PostsService {
         }
     }
 
-    setActivePost(post) {
-        AppState.activePost = post
+    async toggleLike(post) {
+        try {
+            const res = await api.post(`api/posts/${post.id}/like`)
+            const postIndex = AppState.posts.findIndex(appPost => appPost.id == post.id)
+            AppState.posts[postIndex] = new Post(res.data)
+        } catch (error) {
+            logger.error(error)
+            Pop.error(error.message)
+        }
     }
 
     async editPost(post) {
@@ -62,6 +79,14 @@ class PostsService {
         } catch (error) {
             Pop.error(error.message)
         }
+    }
+
+    setActivePost(post) {
+        AppState.activePost = post
+    }
+
+    clearActivePost() {
+        AppState.activePost = null
     }
 
     populateAppStatePosts(response) {

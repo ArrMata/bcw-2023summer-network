@@ -7,8 +7,8 @@
         <div v-else-if="account.id">
             <img class="dropdown-center avatar mb-4" :src="account.picture" :alt="account.name" role="button" data-bs-toggle="dropdown">
             <ul class="dropdown-menu" data-bs-theme="dark" >
-                <li class="dropdown-item">This is an item</li>
-                <li class="dropdown-item">This is another item!</li>
+                <RouterLink :to="{name:'Profile', params:{ profileId:account.id }}"><li class="dropdown-item">My Profile</li></RouterLink>
+                <RouterLink :to="{name:'Account'}"><li class="dropdown-item">Edit Account</li></RouterLink>
                 <li><hr class="dropdown-divider"></li>
                 <li @click="logout" class="dropdown-item">Logout <i class="mdi mdi-logout"></i></li>
             </ul>
@@ -42,19 +42,20 @@
 import { computed } from 'vue'
 import { AppState } from '../AppState'
 import { AuthService } from '../services/AuthService'
+import { RouterLink } from 'vue-router'
 export default {
   setup() {
     return {
-        user: computed(() => AppState.user),
-        account: computed(() => AppState.account),
-        async login() {
-            AuthService.loginWithPopup()
-        },
-        async logout() {
-            AuthService.logout({ returnTo: window.location.origin })
+            user: computed(() => AppState.user),
+            account: computed(() => AppState.account),
+            async login() {
+                AuthService.loginWithPopup()
+            },
+            async logout() {
+                AuthService.logout({ returnTo: window.location.origin })
+            }
         }
-    }
-  }
+    }, components: { RouterLink }
 }
 </script>
 

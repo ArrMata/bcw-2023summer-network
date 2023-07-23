@@ -1,7 +1,7 @@
 <template>
     <form class="post-form" @submit.prevent="createPost">
         <div class="d-flex align-items-start">
-            <img class="avatar" :src="account.picture" :alt="account.name"/>
+          <RouterLink :to="{name:'Profile', params:{ profileId:account.id }}"><img class="avatar" :src="account.picture" :alt="account.name"/></RouterLink>
             <div class="px-3 w-100">
                 <div class="mb-3">
                     <textarea v-model="editable.body" required minlength="3" maxlength="250" textarea class="form-control" id="" rows="3" placeholder="Share something!"></textarea>
@@ -20,6 +20,7 @@
 import { computed, ref } from 'vue';
 import { AppState } from '../AppState';
 import { postsService } from '../services/PostsService';
+import { RouterLink } from 'vue-router';
 
 export default {
     setup() {
@@ -33,7 +34,7 @@ export default {
                 editable.value = {}
             }
         }
-    }
+    }, components:{ RouterLink }
 }
 </script>
 

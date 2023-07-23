@@ -1,15 +1,17 @@
 import { AppState } from "../AppState"
 import { Profile } from "../models/Profile"
-import { logger } from "../utils/Logger"
+import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
 
 class ProfilesService {
-    // async getLoggedInProfile() {
-    //     const loggedInId = AppState.account.id
-    //     const res = await api.get(`api/profiles/${loggedInId}`)
-    //     AppState.accountProfile = new Profile(res.data)
-    //     logger.log(AppState.account)
-    // }
+    async getProfile(profileId) {
+        try {
+            const res = await api.get(`api/profiles/${profileId}`)
+            AppState.activeProfile = new Profile(res.data)
+        } catch (error) {
+            Pop.error(error.message)
+        }
+    }
 }
 
 export const profilesService = new ProfilesService()

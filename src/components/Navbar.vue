@@ -1,16 +1,20 @@
 <template>
     <div class="navbar">
-      <h2>The Network</h2>
+      <RouterLink :to="{name: 'Home'}">
+        <h1>The Network</h1>
+      </RouterLink>
     </div>
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
 export default {
     setup() {
         
 
         return {}
-    }
+    },
+    components:{ RouterLink }
 }
 </script>
 
@@ -21,7 +25,7 @@ export default {
 .navbar {
   color: $text;
   background-color: $primary;
-  padding: 0 0.5rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   box-shadow: 0px 0px 5px rgb(0, 0, 0);
@@ -29,9 +33,17 @@ export default {
   z-index: 1;
 }
 
-.navbar h2 {
+.navbar h1 {
   margin: 0;
   font-weight: 700;
+  color: $text;
+  transition: 0.25s all ease;
 }
+
+.navbar h1:hover {
+  color: $background;
+}
+
+
 
 </style>
