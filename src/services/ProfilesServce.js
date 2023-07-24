@@ -22,6 +22,10 @@ class ProfilesService {
         }
     }
 
+    clearActiveProfile() {
+        AppState.activeProfile = null
+    }
+
     clearProfiles() {
         AppState.profiles = []
     }

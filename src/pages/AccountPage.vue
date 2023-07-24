@@ -84,6 +84,7 @@ export default {
 .main-section {
   height: 100%;
   width: 75%;
+  overflow-y: scroll;
 }
 .profile-container {
     color: $text;

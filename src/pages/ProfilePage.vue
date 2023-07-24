@@ -101,6 +101,7 @@ export default {
 
         onUnmounted(() => {
             postsService.clearPosts()
+            profilesService.clearActiveProfile()
         })
 
         const postsElem = ref(null)
