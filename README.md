@@ -1,16 +1,16 @@
-CodeWorks Vue Starter
-=====================
-This template is designed to help get students started building vue applications
+ ![Network Preview Image](preview.jpg)
 
-## Legal Overview
+# Network
 
-The content under the CodeWorks®, LLC Organization and all of the individual repos are solely intended for use by CodeWorks Instruction to deliver Educational content to CodeWorks Students.
+## Summary
 
----
+Network is a social media client-side application utilizing VueJS and Boise Codeworks' Network API allowing for posts and user profiles. 
 
-## Copyright
+## Technologies Used
 
-© CodeWorks® LLC, 2021. Unauthorized use and/or duplication of this material without express and written permission from CodeWorks, LLC is strictly prohibited.
+- VueJS for the Frontend Javascript Framework
+- RESTful API conventions in order to have consistent API naming conventions
+- Auth0 for user authentication
 
-
-<img src="https://bcw.blob.core.windows.net/public/img/7815839041305055" width="125">
+## What I learned
+This app only focused on utilizing VueJS Framework, and so I get very comfotable with the workflow of Vue and Vue-Router library. Specific highlights of this app us rendering Not-Found page when a user profile is not found in the API, using navigation guards and programmatic routing when needed.
