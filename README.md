@@ -2,6 +2,8 @@
 
 # Network
 
+[Network Live Demo](https://the-network-fgx0.onrender.com)
+
 ## Summary
 
 Network is a social media client-side application utilizing VueJS and Boise Codeworks' Network API allowing for posts and user profiles. 
